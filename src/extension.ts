@@ -45,16 +45,13 @@ export function activate(context: vscode.ExtensionContext) {
     "extension.helloWorld",
     async () => {
       // Display a message box to the user
-      let what = await vscode.window.showInputBox({ placeHolder: "cow say?" });
-      if (what) {
-        let uri = vscode.Uri.parse("swiper:" + what);
-        console.log(uri);
-        let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
-        await vscode.window.showTextDocument(doc, {
-          preview: false,
-          viewColumn: vscode.ViewColumn.Beside
-        });
-      }
+      let uri = vscode.Uri.parse("swiper:Swiper Find View");
+      console.log(uri);
+      let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
+      await vscode.window.showTextDocument(doc, {
+        preview: false,
+        viewColumn: vscode.ViewColumn.Beside
+      });
     }
   );
 
