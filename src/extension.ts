@@ -50,7 +50,10 @@ export function activate(context: vscode.ExtensionContext) {
         let uri = vscode.Uri.parse("swiper:" + what);
         console.log(uri);
         let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
-        await vscode.window.showTextDocument(doc, { preview: false });
+        await vscode.window.showTextDocument(doc, {
+          preview: false,
+          viewColumn: vscode.ViewColumn.Beside
+        });
       }
     }
   );
