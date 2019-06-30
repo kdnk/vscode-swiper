@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
+
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "extension.helloWorld",
@@ -25,13 +26,12 @@ export function activate(context: vscode.ExtensionContext) {
 
       editor = vscode.window.activeTextEditor;
       const position = editor.selection.active;
-      var newPosition = position.with(0, 0);
-      var newSelection = new vscode.Selection(newPosition, newPosition);
+      let newPosition = position.with(0, 0);
+
+      let newSelection = new vscode.Selection(newPosition, newPosition);
       editor.selection = newSelection;
     }
   );
-
-  context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
