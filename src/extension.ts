@@ -51,10 +51,10 @@ export function activate(context: ExtensionContext) {
   );
 
   let disposable2 = languages.registerDocumentLinkProvider(
-    { scheme: "*" },
+    { scheme: "file" },
     provider
   );
-  context.subscriptions.push(disposable, disposable2);
+  context.subscriptions.push(disposable2, disposable);
 }
 
 // this method is called when your extension is deactivated
@@ -69,14 +69,27 @@ class Provider implements DocumentLinkProvider {
 
   provideDocumentLinks(document: TextDocument, token: CancellationToken) {
     if (document) {
+      console.log("document: ", document);
       const lineCount = document.lineCount;
       const uri = document.uri;
       for (let i = 0; i < lineCount; i++) {
         let range = document.lineAt(i).range;
         let link = new DocumentLink(range, uri);
+        console.log("link: ", link);
         this._links.push(link);
+        console.log("this._links: ", this._links);
       }
       return this._links;
     }
+  }
+}
+
+class ReferenceDocument {
+  private _uri: Uri;
+  private _links: DocumentLink[];
+
+  constructor(uri: Uri) {
+    this._uri = uri;
+    this._links = [];
   }
 }
